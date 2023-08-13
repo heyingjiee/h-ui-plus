@@ -128,12 +128,14 @@ npx husky add .husky/pre-commit "npx lint-staged"
 这里我们触发lint校验
 
 ```json
-"lint-staged": {
+{
+	"lint-staged": {
   	//对暂存区的如下文件执行脚本
     "*.{js,ts,tsx,vue,json}": [
       "pnpm lint"
     ]
-  },
+  }
+}
 ```
 
 总结：
@@ -276,6 +278,14 @@ package.json增加脚本
   },
 ```
 
+## CI流程
+
+[github actions](https://github.com/marketplace?type=actions&query=actions)
+
+
+
+
+
 ## 初始化组件库
 
 Node类型支持
@@ -304,7 +314,7 @@ pnpm i -D unocss@"0.45.6"
 pnpm i -D @iconify-json/ic@"1.1.4"
 ```
 
-## 文档
+## 集成文档
 配置Vitepress，参考 https://github.com/vuejs/vitepress/tree/main/docs
 ```shell
 ## 安装vitepress。 新建docs/index.md 。npx vitepress dev docs (package.json中配置脚本也行)

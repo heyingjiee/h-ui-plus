@@ -1,0 +1,31 @@
+# 一个yaml/yml文件就是一个工作流
+
+# 指定工作流名
+name: CI  
+# 触发工作流执行的场景（指定哪个分支，遇到push、pull_request时触发）
+on: 
+  push: 
+    branches: [ mian ]
+  pull_request:
+    branches: [ main ]
+# 一个工作流，可以包含多个jobs（任务）
+jobs: 
+  #这里是一个任务，用于单元测试
+  UnitTest:
+    # runs-on 指定运行的容器环境 windows-(xxx version)、ubuntu-(xxx version)、Macos-(xxx version)
+    runs-on: ubuntu-latest
+    # 指定任务涉及的步骤
+    steps: 
+      # uses 使用第三方的action ，参考：（https://github.com/marketplace?type=actions&query=actions）
+      # with 给action传入参数。至于yaml对应的格式应该是---> steps:[{uses:'pnpm/action-setup@v2.1.0',with:{version:'7.2.1'}}]
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.1.0
+        with: 
+          version: 7.2.1
+      # name 步骤名 ， run 需要执行的脚本
+      - name : Install Dependencies
+        run: pnpm i 
+      - name: Run Test
+        run: pnpm test:run
+
+
