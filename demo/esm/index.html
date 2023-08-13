@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>验证加载全部组件</h1>
+    <div id="app"></div>
+    <script type="module">
+      import { createApp } from "vue/dist/vue.esm-bundler.js";
+      import SmartyUI from "../../dist/h-ui.mjs";
+
+      createApp({
+        template: `
+          <JSButton/>
+          <TSXButton/>
+          <SFCButton/>
+        `,
+      })
+        .use(SmartyUI)
+        .mount("#app");
+    </script>
+  </body>
+</html>

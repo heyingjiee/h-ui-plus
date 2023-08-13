@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>按需加载</h1>
+    <div id="app"></div>
+    <script type="module">
+        import { createApp } from "vue/dist/vue.esm-bundler.js";
+        import { JSButton, TSXButton, SFCButton } from "../../dist/h-ui.mjs";
+
+        createApp({
+          template: `
+                <JSButton/>
+                <TSXButton/>
+                <SFCButton/>
+            `,
+          // 组件标签名是name字段
+        })
+  .component(JSButton.name, JSButton)
+  .component(TSXButton.name, TSXButton)
+  .component(SFCButton.name, SFCButton)
+  .mount("#app");
+    </script>
+
+</body>
+
+</html>
