@@ -5,7 +5,7 @@ name: CI
 # 触发工作流执行的场景（指定哪个分支，遇到push、pull_request时触发）
 on: 
   push: 
-    branches: [ mian ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 # 一个工作流，可以包含多个jobs（任务）
