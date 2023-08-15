@@ -4,8 +4,12 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
     title: 'Hello HUI',
     description: 'vue3组件库',
+    head: [['link', { rel: 'icon', href: 'https://heyingjiee.github.io/logo.png' }]],
     themeConfig: {
         logo: 'https://heyingjiee.github.io/logo.png',
+        socialLinks: [
+            { icon: 'github', link: 'https://github.com/heyingjiee/h-ui-plus' }
+          ],
         nav: [
             { text: '指南', link: '/guide' },
             { text: '组件', link: '/components/Button.md' },

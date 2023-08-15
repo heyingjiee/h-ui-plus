@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
-import HUI from '../../../src/entry'
+// import HUI from '../../../src/entry'
 export default {
   extends: DefaultTheme,
   enhanceApp(ctx) {
