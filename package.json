@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "preinstall": "node ./scripts/preinstall.js",
     "prepare": "husky install",
     "dev": "vite dev",
     "build": "vite build",
@@ -51,7 +53,7 @@
     "typescript": "^5.1.6",
     "unocss": "0.54.1",
     "vite": "^4.4.8",
-    "vitepress": "1.0.0-beta.3",
+    "vitepress": "1.0.0-rc.4",
     "vitepress-theme-demoblock": "3.0.3",
     "vitest": "^0.34.1",
     "vue": "3.3.4"

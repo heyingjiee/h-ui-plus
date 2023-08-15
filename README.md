@@ -1,4 +1,5 @@
 # 组件库项目
+[![CI](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml)
 
 ## 目录规范
 
@@ -280,11 +281,55 @@ package.json增加脚本
 
 ## CI流程
 
-[github actions](https://github.com/marketplace?type=actions&query=actions)
+**使用Action添加CI流程**
+
+新建`.github/workflows/main.yml`
+
+```yml
+# 一个yaml/yml文件就是一个工作流
+
+# 指定工作流名
+name: CI  
+# 触发工作流执行的场景（指定哪个分支，遇到push、pull_request时触发）
+on: 
+  push: 
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+# 一个工作流，可以包含多个jobs（任务）
+jobs: 
+  #这里是一个任务，用于单元测试
+  UnitTest:
+    # runs-on 指定运行的容器环境 windows-(xxx version)、ubuntu-(xxx version)、Macos-(xxx version)
+    runs-on: ubuntu-latest
+    # 指定任务涉及的步骤
+    steps: 
+      # uses 使用第三方的action ，参考：（https://github.com/marketplace?type=actions&query=actions）
+      # with 给action传入参数。至于yaml对应的格式应该是---> steps:[{uses:'pnpm/action-setup@v2.1.0',with:{version:'7.2.1'}}]
+      - uses: actions/checkout@v3 #
+      - uses: pnpm/action-setup@v2 # 使用pnpm安装依赖，传入参数version指定pnpm版本
+        with: 
+          version: 8 
+      # name 步骤名 ， run 需要执行的脚本
+      - name : Install Dependencies
+        run: pnpm i 
+      - name: Run Test
+        run: pnpm test:run
+```
+
+提交到GitHub的main分支，会自动触发Action
 
 
 
+**生成Action徽章**
 
+在GitHub上进入Actions页签，选择一个工作流进入
+
+![image-20230814004024229](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814004024%20.png)
+
+![image-20230814003910444](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814003910%20.png)
+
+![image-20230814004101888](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814004102%20.png)
 
 ## 初始化组件库
 
@@ -322,3 +367,22 @@ pnpm i vitepress@1.0.0-beta.7 -D
 ## vitepress的一个主题，可以实现展示Vue组件+组件代码。https://www.npmjs.com/package/vitepress-theme-demoblock
 pnpm i vitepress-theme-demoblock@3.0.3 -D
 ```
+
+## README
+
+标准README格式：https://github.com/RichardLitt/standard-readme
+
+### 徽章
+
+* GitHub Action 徽章
+
+  徽章名是在yaml文件中定义的Action工作流名，徽章状态会自动跟随Action结果变化
+
+  [![CI](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml)
+
+* 自己生成的徽章
+
+  https://shields.io/
+
+
+
