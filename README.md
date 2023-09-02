@@ -7,7 +7,7 @@
 .
 ├── config              # 配置文件
 ├── coverage            # 覆盖率报告
-├── demo                # 代码范例
+├── demo                # 代码范例 （可以叫example）
 ├── docs                # 文档
 ├── node_modules  
 ├── scripts             # 脚本 发布、提交信息检查
@@ -279,7 +279,9 @@ package.json增加脚本
   },
 ```
 
-## CI流程
+## CI/CD流程
+
+### 推送分支触发单元测试
 
 **使用Action添加CI流程**
 
@@ -306,7 +308,7 @@ jobs:
     steps: 
       # uses 使用第三方的action ，参考：（https://github.com/marketplace?type=actions&query=actions）
       # with 给action传入参数。至于yaml对应的格式应该是---> steps:[{uses:'pnpm/action-setup@v2.1.0',with:{version:'7.2.1'}}]
-      - uses: actions/checkout@v3 #
+      - uses: actions/checkout@v3 # 克隆仓库
       - uses: pnpm/action-setup@v2 # 使用pnpm安装依赖，传入参数version指定pnpm版本
         with: 
           version: 8 
@@ -330,6 +332,56 @@ jobs:
 ![image-20230814003910444](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814003910%20.png)
 
 ![image-20230814004101888](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814004102%20.png)
+
+
+
+### 合并分支触发npm自动发布
+
+发布npm包的触发条件，肯定不是每次 push
+
+一般是：新建一个publish分支，设置合并到该分支触发一个Action。这个Action来进行自动发布npm包
+
+```shell
+git checkout -b publish
+git push -u origin publish
+```
+
+由于npm要求首次发布需要验证码，所以本地新建publish.sh脚本，用户执行脚本进行首次发布
+
+```sh
+#!/usr/bin/env bash
+npm config get registry # 检查仓库镜像库
+npm config set registry=https://registry.npmjs.org #设置为官方源
+echo '请进行登录相关操作：'
+npm login # 登陆
+echo "-------publishing-------"
+npm publish # 发布
+# npm config set registry=https://registry.npm.taobao.org # 设置为淘宝镜像
+echo "发布完成"
+exit
+```
+
+执行脚本，首次发布（输入npm的用户名、密码、邮箱、验证码）
+
+```
+./publish.sh
+```
+
+首次发布后，其余更新就可以使用 CI 工具自动完成了。步骤：
+
+* 获取npm token，用于Action自动发布到npm上
+
+  ![image-20230902201443287](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230902201443%20.png)
+
+* 我们发布到npm需要使用npm的token，但是Action 代码是公开的，我们需要提前把token设置到Action的环境变量中。在Action脚本中就可以直接引用了，更加安全
+
+  ![image-20230902200947687](/Users/yc/Library/Application Support/typora-user-images/image-20230902200947687.png)
+
+* 编写Action脚本
+
+  
+
+
 
 ## 初始化组件库
 
@@ -367,6 +419,13 @@ pnpm i vitepress@1.0.0-beta.7 -D
 ## vitepress的一个主题，可以实现展示Vue组件+组件代码。https://www.npmjs.com/package/vitepress-theme-demoblock
 pnpm i vitepress-theme-demoblock@3.0.3 -D
 ```
+
+## 项目版本
+
+```
+```
+
+
 
 ## README
 
