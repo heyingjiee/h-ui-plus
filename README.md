@@ -161,6 +161,7 @@ pnpm i @commitlint/config-conventional -D ## Angular团队的提交信息规范
 配置commit message规则
 
 ```js
+//commitlint.config.js
 module.exports = {
     extends: ['@commitlint/config-conventional'],
 }
@@ -281,6 +282,10 @@ package.json增加脚本
 
 ## CI/CD流程
 
+CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好的一些常用的脚本，当然这些脚本也支持自己定义。可以在下面网址查找：
+
+https://github.com/marketplace?type=actions&query=actions
+
 ### 推送分支触发单元测试
 
 **使用Action添加CI流程**
@@ -363,7 +368,8 @@ exit
 
 执行脚本，首次发布（输入npm的用户名、密码、邮箱、验证码）
 
-```
+```shell
+chmod +x publish.sh #默认创建的文件没有执行权限，需要增加执行权限
 ./publish.sh
 ```
 

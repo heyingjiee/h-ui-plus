@@ -20,7 +20,7 @@ jobs:
       - name: Build
         run: pnpm build
       - name: "Publish to the npm"
-        uses: primer/publish@3.0.0 # 用于发布到npm
+        uses: primer/publish@v3 # 用于发布到npm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # 跟前面步骤中的 NPM_AUTH_TOKEN 保持一致
