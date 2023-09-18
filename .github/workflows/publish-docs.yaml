@@ -1,0 +1,23 @@
+name: Publish Docs
+
+on:
+  pull_request:
+    branches: [publish]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Build
+        run: pnpm build
+      - name: "Publish Docs"
+        run: |
+          chmod +x ./sh/publish-docs.sh 
+          ./sh/publish-docs.sh 
