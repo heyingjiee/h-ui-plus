@@ -428,8 +428,28 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 
 ## 项目版本
 
+项目的版本，在package.json的version字段
+
+![image-20230918112701375](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918112701%20.png)
+
+版本格式：**主版本号.次版本号.修订号 -[版本状态]**
+
+* 主版本号：不兼容的 API 修改
+* 次版本号：向下兼容的功能性新增
+* 修订号：向下兼容的问题修正 
+* 版本状态
+  * 预览版：alpha、alpha-2
+  * 公开测试版：beta
+  * 上线候选版（Release Condidate）：即已经具备正式上线条件的版本，RC
+  * 正式发布的版本（General Availability ），GA
+
+例如：
+
 ```
+0.0.1 - alpha
 ```
+
+
 
 
 

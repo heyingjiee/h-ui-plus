@@ -20,10 +20,18 @@ jobs:
       - name: Build
         run: pnpm build
       - name: "Publish to the npm"
-        uses: primer/publish@v3 # 用于发布到npm
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # 跟前面步骤中的 NPM_AUTH_TOKEN 保持一致
-        with:
-          default_branch: "publish" # 默认的发布分支
-          dir: "." #package.json做在目录。默认'.'
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: |
+          chmod +x ./publish.sh 
+          ./publish.sh
+        
+
+#        uses: primer/publish@v3 # 用于发布到npm
+#        env:
+#          # ${{ secrets.xxx }} 是在项目Setting中设置的Actions secrets中设置的秘钥
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # 去npm仓库获取npm的token，并在在Github项目设置中 创建 NPM_AUTH_TOKEN 把获取到的值加进去就行了
+#        with:
+#          default_branch: "publish" # 默认的发布分支
+#          dir: "." #package.json做在目录。默认'.'
