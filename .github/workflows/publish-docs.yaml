@@ -19,5 +19,5 @@ jobs:
         run: pnpm build
       - name: "Publish Docs"
         run: |
-          chmod +x ./sh/publish-docs.sh 
-          ./sh/publish-docs.sh 
+          chmod +x ../../sh/publish-docs.sh 
+          ../../sh/publish-docs.sh 

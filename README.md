@@ -418,7 +418,7 @@ chmod +x publish.sh #默认创建的文件没有执行权限，需要增加执�
 name: Publish To Npm
 
 on:
-  push:
+  pull_request:
     branches: [publish]
 
 jobs:
@@ -443,6 +443,12 @@ jobs:
           chmod +x ./publish.sh 
           ./publish.sh
 ```
+
+触发
+
+![image-20230918175445289](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918175445%20.png)
+
+![image-20230918175428409](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918175428%20.png)
 
 ### 合并分支触发文档部署
 

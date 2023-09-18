@@ -21,8 +21,8 @@ jobs:
         env:
           NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
-          chmod +x ./sh/publish-npm.sh 
-          ./sh/publish.sh
+          chmod +x ../../sh/publish-npm.sh 
+          ../../sh/publish.sh
         
 #        该action已停止维护
 #        uses: primer/publish@v3 # 用于发布到npm
