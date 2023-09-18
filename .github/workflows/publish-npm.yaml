@@ -21,8 +21,10 @@ jobs:
         env:
           NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
+          current_directory=$(pwd)
+          echo "当前工作目录是: $current_directory"
           chmod +x ../../sh/publish-npm.sh 
-          ../../sh/publish.sh
+          ../../sh/publish-npm.sh 
         
 #        该action已停止维护
 #        uses: primer/publish@v3 # 用于发布到npm
