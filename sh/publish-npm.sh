@@ -24,6 +24,7 @@ if [ $? -eq 0 ]; then
     echo "发布成功"
 else
     echo "发布失败"
+    exit 1
 fi
 
 exit

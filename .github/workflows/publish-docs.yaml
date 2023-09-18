@@ -18,6 +18,9 @@ jobs:
       - name: Build
         run: pnpm build
       - name: "Publish Docs"
+        env:
+          # 文档仓库 h-ui-plus-docs 的访问token
+          GITHUB_TOKEN: ${{secrets.DOCS_GITHUB_TOKEN}}
         run: |
           chmod +x ./sh/publish-docs.sh 
           ./sh/publish-docs.sh 

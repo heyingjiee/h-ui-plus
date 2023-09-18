@@ -17,6 +17,6 @@ cd ./docs/.vitepress/dist
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:heyingjiee/h-ui-plus-docs.git HEAD:gh-pages
+git push -f "$GITHUB_TOKEN"@github.com/heyingjiee/h-ui-plus-docs.git HEAD:gh-pages
 
 cd -
