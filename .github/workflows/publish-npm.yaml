@@ -8,8 +8,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    # environment: npm
-
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -21,12 +19,12 @@ jobs:
         run: pnpm build
       - name: "Publish to the npm"
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
+          NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
           chmod +x ./publish.sh 
           ./publish.sh
         
-
+#        该action已停止维护
 #        uses: primer/publish@v3 # 用于发布到npm
 #        env:
 #          # ${{ secrets.xxx }} 是在项目Setting中设置的Actions secrets中设置的秘钥
