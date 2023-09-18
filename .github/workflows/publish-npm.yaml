@@ -21,7 +21,7 @@ jobs:
         run: pnpm build
       - name: "Publish to the npm"
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
           chmod +x ./publish.sh 
           ./publish.sh
