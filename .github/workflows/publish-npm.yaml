@@ -21,8 +21,6 @@ jobs:
         env:
           NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
-          current_directory=$(pwd)
-          echo "当前工作目录是: $current_directory"
           chmod +x ./sh/publish-npm.sh 
           ./sh/publish-npm.sh 
         
