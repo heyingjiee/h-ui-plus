@@ -23,8 +23,8 @@ jobs:
         run: |
           current_directory=$(pwd)
           echo "当前工作目录是: $current_directory"
-          chmod +x ../../sh/publish-npm.sh 
-          ../../sh/publish-npm.sh 
+          chmod +x ./sh/publish-npm.sh 
+          ./sh/publish-npm.sh 
         
 #        该action已停止维护
 #        uses: primer/publish@v3 # 用于发布到npm

@@ -19,5 +19,7 @@ jobs:
         run: pnpm build
       - name: "Publish Docs"
         run: |
-          chmod +x ../../sh/publish-docs.sh 
-          ../../sh/publish-docs.sh 
+          current_directory=$(pwd)
+          echo "当前工作目录是: $current_directory"
+          chmod +x ./sh/publish-docs.sh 
+          ./sh/publish-docs.sh 
