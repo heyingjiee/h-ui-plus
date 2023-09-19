@@ -1,7 +1,7 @@
 name: Publish To Npm
 
 on:
-  push:
+  pull_request:
     branches: [publish]
 
 jobs:
@@ -21,8 +21,8 @@ jobs:
         env:
           NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
-          chmod +x ./publish.sh 
-          ./publish.sh
+          chmod +x ./scripts/publish-npm.sh 
+          ./scripts/publish-npm.sh 
         
 #        该action已停止维护
 #        uses: primer/publish@v3 # 用于发布到npm

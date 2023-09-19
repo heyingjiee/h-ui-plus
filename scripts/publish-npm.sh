@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# 确保脚本抛出遇到的错误
+set -e
+
 #设置为官方源
 npm config set registry=https://registry.npmjs.org
 
@@ -20,6 +24,7 @@ if [ $? -eq 0 ]; then
     echo "发布成功"
 else
     echo "发布失败"
+    exit 1
 fi
 
 exit

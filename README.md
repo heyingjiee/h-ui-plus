@@ -1,16 +1,21 @@
 # 组件库项目
-[![CI](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml)
+[![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)  [![Publish Docs](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml)  [![Publish To Npm](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml)
+
+
 
 ## 目录规范
 
 ```plain
 .
+├── .github
+|     └── workflows     #Github Action的文件
+├── node_modules  
 ├── config              # 配置文件
+├── scripts             # 脚本  （shell+js），一般是package.json中脚本、Action中调用
 ├── coverage            # 覆盖率报告
 ├── demo                # 代码范例 （可以叫example）
 ├── docs                # 文档
-├── node_modules  
-├── scripts             # 脚本 发布、提交信息检查
+├── cli                	# CLI工具
 ├── src                 # 组件代码                # 组件代码
 |   └── button          # 组件包名（小写 + 中划线）
 |        ├── index.ts    # 组件入口
@@ -282,21 +287,21 @@ package.json增加脚本
 
 ## CI/CD流程
 
-CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好的一些常用的脚本，当然这些脚本也支持自己定义。可以在下面网址查找：
+CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好的一些常用的脚本，当然这些脚本也支持自己定义。可以在下面网址查找：[Action 应用市场](https://github.com/marketplace?type=actions&query=actions)
 
-https://github.com/marketplace?type=actions&query=actions
+[Action文档](https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#name)
 
 ### 推送分支触发单元测试
 
 **使用Action添加CI流程**
 
-新建`.github/workflows/main.yml`
+新建`.github/workflows/test.yml`
 
 ```yml
 # 一个yaml/yml文件就是一个工作流
 
 # 指定工作流名
-name: CI  
+name: Unit Test 
 # 触发工作流执行的场景（指定哪个分支，遇到push、pull_request时触发）
 on: 
   push: 
@@ -326,17 +331,19 @@ jobs:
 
 提交到GitHub的main分支，会自动触发Action
 
+仓库的Action页签下可以查看到
+
+![image-20230918173446554](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918173446%20.png)
+
 
 
 **生成Action徽章**
 
 在GitHub上进入Actions页签，选择一个工作流进入
 
-![image-20230814004024229](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814004024%20.png)
+![image-20230918173550113](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918173550%20.png)
 
-![image-20230814003910444](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814003910%20.png)
-
-![image-20230814004101888](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230814004102%20.png)
+![image-20230918173626399](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918173626%20.png)
 
 
 
@@ -351,41 +358,103 @@ git checkout -b publish
 git push -u origin publish
 ```
 
-由于npm要求首次发布需要验证码，所以本地新建publish.sh脚本，用户执行脚本进行首次发布
+根目录新建publish.sh脚本
+
+此脚本判断了是否存在环境NPN_AUTH_TOKEN，这个环境变量是npm的token
+
+如果没有就调用npm login，随后提示输入npm的用户名、密码、邮箱，才能发布
+
+如果有就直接设置到npm的配置中，就可以直接发布了（Github Action可以通过环境变量传入）
 
 ```sh
 #!/usr/bin/env bash
-npm config get registry # 检查仓库镜像库
-npm config set registry=https://registry.npmjs.org #设置为官方源
-echo '请进行登录相关操作：'
-npm login # 登陆
+#设置为官方源
+npm config set registry=https://registry.npmjs.org
+
+# $NPN_AUTH_TOKEN是npm的token
+# 使用 -z 选项检查环境变量是否为空或未定义
+if [ -z "$NPN_AUTH_TOKEN" ]; then
+    #未定义
+    echo '请进行登录相关操作：'
+    npm login # 登陆
+else
+  #已定义 Github Action传入了，有这个npm的token就可以不用登录了
+   npm config set //registry.npmjs.org/:_authToken "$NPN_AUTH_TOKEN"
+fi #shell语法，结束if语句块
+
 echo "-------publishing-------"
 npm publish # 发布
 # npm config set registry=https://registry.npm.taobao.org # 设置为淘宝镜像
-echo "发布完成"
+if [ $? -eq 0 ]; then # $?用于获取最后一个执行命令的退出状态码，-eq是等于
+    echo "发布成功"
+else
+    echo "发布失败"
+fi 
+
 exit
 ```
 
-执行脚本，首次发布（输入npm的用户名、密码、邮箱、验证码）
+**本地执行脚本**
 
 ```shell
 chmod +x publish.sh #默认创建的文件没有执行权限，需要增加执行权限
 ./publish.sh
 ```
 
-首次发布后，其余更新就可以使用 CI 工具自动完成了。步骤：
+**Action执行脚本**
 
-* 获取npm token，用于Action自动发布到npm上
+获取npm token，用于Action自动发布到npm上
 
-  ![image-20230902201443287](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230902201443%20.png)
+![image-20230902201443287](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230902201443%20.png)
 
-* 我们发布到npm需要使用npm的token，但是Action 代码是公开的，我们需要提前把token设置到Action的环境变量中。在Action脚本中就可以直接引用了，更加安全
 
-  ![image-20230902200947687](/Users/yc/Library/Application Support/typora-user-images/image-20230902200947687.png)
 
-* 编写Action脚本
+我们发布到npm需要使用npm的token，但是Action 代码是公开的，我们需要提前把token设置到Action的环境变量中。在Action脚本中就可以直接引用了，更加安全
 
-  
+![image-20230902200947687](/Users/yc/Library/Application Support/typora-user-images/image-20230902200947687.png)
+
+编写Action脚本
+
+```yaml
+# .github/workflows/publish-npm.sh
+name: Publish To Npm
+
+on:
+  pull_request:
+    branches: [publish]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Build
+        run: pnpm build
+      - name: "Publish to the npm"
+      	#注入的环境变量，在./publish.sh中会接收到
+        env:
+          NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}} # github Action中通过secrets.xxx引用环境变量
+        #|是管道符，表示后续的文本块作为纯文本字符串处理，并保留其中的换行符和格式。run: |就可以理解为执行后面的脚本
+        run: |  
+          chmod +x ./publish.sh 
+          ./publish.sh
+```
+
+pr触发如何操作？
+
+![image-20230918175445289](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918175445%20.png)
+
+![image-20230919101611816](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230919101612%20.png)
+
+### 合并分支触发文档部署
+
+
 
 
 
@@ -446,7 +515,7 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 例如：
 
 ```
-0.0.1 - alpha
+0.0.1-alpha
 ```
 
 
@@ -463,11 +532,19 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 
   徽章名是在yaml文件中定义的Action工作流名，徽章状态会自动跟随Action结果变化
 
-  [![CI](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/main.yml)
+  [![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
 
 * 自己生成的徽章
 
   https://shields.io/
 
 
+
+## CLI
+
+CLI工具
+
+[艺术字生成](https://tooltt.com/art-ascii/)
+
+![image-20230919110723538](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230919110723%20.png)
 
