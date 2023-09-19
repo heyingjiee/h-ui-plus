@@ -1,5 +1,7 @@
 # 组件库项目
-[![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
+[![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)[![Publish Docs](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml)[![Publish To Npm](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml)
+
+
 
 ## 目录规范
 
@@ -7,13 +9,13 @@
 .
 ├── .github
 |     └── workflows     #Github Action的文件
+├── node_modules  
 ├── config              # 配置文件
+├── scripts             # 脚本  （shell+js），一般是package.json中脚本、Action中调用
 ├── coverage            # 覆盖率报告
 ├── demo                # 代码范例 （可以叫example）
 ├── docs                # 文档
-├── node_modules  
-├── scripts             # JS脚本  
-├── sh									# shell脚本 
+├── cli                	# CLI工具
 ├── src                 # 组件代码                # 组件代码
 |   └── button          # 组件包名（小写 + 中划线）
 |        ├── index.ts    # 组件入口
@@ -513,7 +515,7 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 例如：
 
 ```
-0.0.1 - alpha
+0.0.1-alpha
 ```
 
 
@@ -537,4 +539,10 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
   https://shields.io/
 
 
+
+## CLI
+
+[艺术字生成](https://tooltt.com/art-ascii/)
+
+![image-20230919110723538](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230919110723%20.png)
 
