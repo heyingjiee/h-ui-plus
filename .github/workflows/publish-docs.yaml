@@ -25,6 +25,9 @@ jobs:
           git config --global user.name "Action auto publish"    
           git checkout -b gh-pages
           npm run docs:build
+          git status
+          cd ./docs/.vitepress/dist
+          ls
           git add .
           git commit -m "docs: Action Auto Publish"
           git push -u origin gh-pages
