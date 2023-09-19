@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress'
 
 
 export default defineConfig({
+    //发布在github page，地址是<username>.github.io/h-ui-plus
+    base: '/h-ui-plus/',
     title: 'Hello HUI',
     description: 'vue3组件库',
     head: [['link', { rel: 'icon', href: 'https://heyingjiee.github.io/logo.png' }]],
