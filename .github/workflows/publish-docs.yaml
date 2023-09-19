@@ -26,5 +26,5 @@ jobs:
           git config --global user.name "Action Auto Publish"
           git add .
           git commit -m "docs:文档部署"
-          git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git  
+          git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus-docs.git  
           git push -u origin gh-pages
