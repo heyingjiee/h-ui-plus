@@ -18,17 +18,7 @@ jobs:
       - name: Build
         run: pnpm build
       - name: "Publish Docs" #本质就是发布到仓库的gh-pages分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
-        #  cd ./docs/.vitepress/dist
-        # git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git
         run: |
-#          git config --global user.email "1270433876@qq.com"
-#          git config --global user.name "Action auto publish"
-#          git checkout -b gh-pages
-#          npm run docs:build
-#          git add .
-#          git commit -m "docs: Action Auto Publish"
-#          git push -u origin gh-pages
-#
           npm run docs:build
           cd ./docs/.vitepress/dist 
           git init --initial-branch=gh-pages
