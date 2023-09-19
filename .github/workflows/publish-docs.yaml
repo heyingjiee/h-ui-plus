@@ -21,6 +21,8 @@ jobs:
         #  cd ./docs/.vitepress/dist
         # git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git
         run: |
+          git config --global user.email "1270433876@qq.com"
+          git config --global user.name "Action auto publish"
           git checkout -b gh-pages
           npm run docs:build
           git add .
