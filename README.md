@@ -444,11 +444,11 @@ jobs:
           ./publish.sh
 ```
 
-触发
+pr触发如何操作？
 
 ![image-20230918175445289](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918175445%20.png)
 
-![image-20230918175428409](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918175428%20.png)
+![image-20230919101611816](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230919101612%20.png)
 
 ### 合并分支触发文档部署
 
