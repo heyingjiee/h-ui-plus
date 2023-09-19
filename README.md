@@ -456,7 +456,7 @@ pr触发如何操作？
 
 
 
-
+![image-20230920012757731](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230920012758%20.png)
 
 ## 初始化组件库
 
