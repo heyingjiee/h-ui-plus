@@ -17,10 +17,9 @@ jobs:
         run: pnpm i
       - name: Build
         run: pnpm build
-      - name: "Publish Docs"
-        env:
-          # 文档仓库 h-ui-plus-docs 的访问token
-          GITHUB_TOKEN: ${{secrets.DOCS_GITHUB_TOKEN}}
+      - name: "Publish Docs" #本质就是发布到仓库的gh-pages分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
         run: |
-          chmod +x ./sh/publish-docs.sh 
-          ./sh/publish-docs.sh 
+          npm run docs:build
+          cd ./docs/.vitepress/dist 
+          git push -f https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git HEAD:gh-pages
+

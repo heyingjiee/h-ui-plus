@@ -285,9 +285,9 @@ package.json增加脚本
 
 ## CI/CD流程
 
-CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好的一些常用的脚本，当然这些脚本也支持自己定义。可以在下面网址查找：
+CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好的一些常用的脚本，当然这些脚本也支持自己定义。可以在下面网址查找：[Action 应用市场](https://github.com/marketplace?type=actions&query=actions)
 
-https://github.com/marketplace?type=actions&query=actions
+[Action文档](https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#name)
 
 ### 推送分支触发单元测试
 
@@ -451,6 +451,8 @@ jobs:
 ![image-20230918175428409](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230918175428%20.png)
 
 ### 合并分支触发文档部署
+
+
 
 
 
