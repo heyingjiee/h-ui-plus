@@ -21,5 +21,9 @@ jobs:
         run: |
           npm run docs:build
           cd ./docs/.vitepress/dist 
-          git push -f https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git HEAD:gh-pages
+          git init --initial-branch=gh-pages
+          git add .
+          git commit -m "docs:文档部署"
+          git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git  
+          git push -u origin gh-pages
 
