@@ -454,6 +454,66 @@ pr触发如何操作？
 
 ### 合并分支触发文档部署
 
+编写Action脚本
+```yaml
+#publish-docs.yaml
+name: Publish Docs
+
+on:
+  pull_request:
+    branches: [publish]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Build
+        run: pnpm build
+      - name: "Publish Docs" 
+      #本质就是发布到仓库的一个分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
+        run: |
+          npm run docs:build
+          cd ./docs/.vitepress/dist 
+          git init --initial-branch=gh-pages
+          git config --global user.email "1270433876@qq.com"
+          git config --global user.name "Action Auto Publish"
+          git add .
+          git commit -m "docs:文档部署"
+          git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git  
+          git push -f -u  origin gh-pages
+```
+
+仓库中开启GitHub Pages，指定我们上次的gh-pages分支
+
+![image-20230920012757731](https://hedaodao-1256075778.cos.ap-beijing.myqcloud.com/Essay/20230920012758%20.png)
+
+Github Page被发布在了 
+
+```text
+https://<username>.github.io/h-ui-plus
+```
+
+注意：由于我的项目并不是部署在根目录下的，而是在h-ui-plus下的
+
+所以，要在vitepress目录下的.vitepress/config.ts文件中，配置base
+
+```js
+import { defineConfig } from 'vitepress'
+
+
+export default defineConfig({
+    //发布在github page，地址是<username>.github.io/h-ui-plus
+    base: '/h-ui-plus/', 
+})
+```
+
 
 
 

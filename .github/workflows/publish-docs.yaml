@@ -27,4 +27,4 @@ jobs:
           git add .
           git commit -m "docs:文档部署"
           git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git  
-          git push -u origin gh-pages
+          git push -f -u  origin gh-pages
