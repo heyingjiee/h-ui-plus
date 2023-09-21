@@ -9,6 +9,6 @@ describe("Button分组", () => {
   test("加载TSX组件，对比组件文本", () => {
     const wrapper = shallowMount(TSXButton);
 
-    expect(wrapper.text()).toBe("TSX测试");
+    expect(wrapper.text()).toBe("TSXButton组件");
   });
 });
