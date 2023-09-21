@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import path from "path";
 
@@ -11,7 +10,7 @@ import Unocss from "./config/unocss";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   //vite原生没有test字段，使用三斜线指令引入reference types="vitest"

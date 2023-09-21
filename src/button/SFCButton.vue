@@ -6,8 +6,8 @@
   </button>
 </template>
 
-<script lang="ts">
-export default {
+<script lang="ts" setup>
+defineOptions({
   name: "SFCButton",
-};
+});
 </script>

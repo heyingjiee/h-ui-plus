@@ -4,7 +4,7 @@ import JSButton from "../src/button/JSButton";
 import TSXButton from "../src/button/TSXButton";
 import SFCButton from "../src/button/SFCButton.vue";
 
-export { JSButton, SFCButton, TSXButton };
+import "uno.css";
 
 export default {
   install(app: App): void {
@@ -13,3 +13,5 @@ export default {
     app.component(SFCButton.name, SFCButton);
   },
 };
+
+export { JSButton, SFCButton, TSXButton };

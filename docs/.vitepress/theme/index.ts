@@ -1,14 +1,10 @@
-import DefaultTheme from 'vitepress/theme'
-import "unocss";
+import Theme from 'vitepress/theme'
 import HUI from '../../../src/entry'
 import './style/var.css'
 
 export default {
-  extends: DefaultTheme,
-  enhanceApp(ctx) {
-    console.log(ctx)
-    // register your custom global components
-    // ctx.app.component('JSButton', JSButton)
-    ctx.app.use(HUI)
+  extends: Theme,
+  enhanceApp({app}) {
+    app.use(HUI)
   }
 }

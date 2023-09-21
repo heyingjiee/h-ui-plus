@@ -1,5 +1,5 @@
 # Buttom
-按钮组件
-## JSX按钮
 
-<SFCButton>111</SFCButton>
+<SFCButton>SFC按钮</SFCButton>
+
+<JSButton>JS1按钮</JSButton>

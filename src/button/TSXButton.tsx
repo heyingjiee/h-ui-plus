@@ -3,9 +3,26 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "TSXButton",
   render() {
-    return <button>TSX测试</button>;
+    return (
+      <button
+        class={`
+          bg-indigo-500
+          rounded-md
+          px-5
+          py-2
+          text-white
+          border-none
+          cursor-pointer
+          transition duration-300 ease-in-out transform hover:scale-105
+          mx-1
+          `}
+      >
+        TSXButton组件
+      </button>
+    );
   },
 });
+
 // import { defineComponent, PropType } from "vue";
 // import "uno.css";
 

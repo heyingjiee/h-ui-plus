@@ -1,8 +1,7 @@
 import { createApp } from "vue";
-import "uno.css";
 
-// import JSButton from './src/button/JSButton'
-// import TSXButton from './src/button/TSXButton'
-import SFCButtton from "./src/button/SFCButton.vue";
+//import { JSButton } from "./src/entry";
+//import { TSXButton } from "./src/entry";
+import { SFCButton } from "./src/entry";
 
-createApp(SFCButtton).mount("#app");
+createApp(SFCButton).mount("#app");
