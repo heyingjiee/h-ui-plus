@@ -4,7 +4,7 @@
 set -e
 
 # 进入组件库目录
-cd packages/h-ui-plus-components
+cd ../packages/h-ui-plus-components
 
 #设置为官方源
 npm config set registry=https://registry.npmjs.org
