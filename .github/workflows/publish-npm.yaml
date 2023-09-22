@@ -14,15 +14,18 @@ jobs:
         with:
           version: 8
       - name: Install Dependencies
-        run: pnpm i
+        run: |
+          cd ./packages/h-ui-plus-components  
+          pnpm i
       - name: Build
         run: pnpm build
       - name: "Publish to the npm"
         env:
           NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
-          chmod +x ./scripts/publish-npm.sh 
-          ./scripts/publish-npm.sh 
+          pnpm config set registry=https://registry.npmjs.org
+          pnpm config set //registry.npmjs.org/:_authToken "$NPN_AUTH_TOKEN"
+          pnpm publish
         
 #        该action已停止维护
 #        uses: primer/publish@v3 # 用于发布到npm

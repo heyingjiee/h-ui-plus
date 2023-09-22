@@ -14,14 +14,15 @@ jobs:
         with:
           version: 8
       - name: Install Dependencies
-        run: pnpm i
+        # 这里的./是相对项目根目录，进入文档目录
+        run: |
+          cd ./packages/h-ui-plus-docs  
+          pnpm i
       - name: Build
         run: pnpm build
       - name: "Publish Docs" #本质就是发布到仓库的gh-pages分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
-        # 这里的./是相对项目根目录
         run: |
-          cd ./packages/h-ui-plus-docs  
-          npm run docs:build
+          pnpm run docs:build
           cd ./docs/.vitepress/dist 
           git init --initial-branch=gh-pages
           git config --global user.email "1270433876@qq.com"
