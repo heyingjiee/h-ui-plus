@@ -3,6 +3,9 @@
 # 确保脚本抛出遇到的错误
 set -e
 
+# 进入组件库目录
+cd packages/h-ui-plus-components
+
 #设置为官方源
 npm config set registry=https://registry.npmjs.org
 
