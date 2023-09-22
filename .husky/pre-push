@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo ====单元测试====
+cd packages/h-ui-plus-components || exit # 前面执行失败，才会执行exit（退出脚本）
 pnpm test:run

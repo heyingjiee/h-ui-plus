@@ -1,8 +1,8 @@
 import { App } from "vue";
 
-import JSButton from "../src/button/JSButton";
-import TSXButton from "../src/button/TSXButton";
-import SFCButton from "../src/button/SFCButton.vue";
+import JSButton from "./button/JSButton";
+import TSXButton from "./button/TSXButton";
+import SFCButton from "./button/SFCButton.vue";
 
 import "uno.css";
 
