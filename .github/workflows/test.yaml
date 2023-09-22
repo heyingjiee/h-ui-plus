@@ -26,6 +26,8 @@ jobs:
       - name : Install Dependencies
         run: pnpm i 
       - name: Run Test
-        run: pnpm test:run
+        run: |
+          cd packages/h-ui-plus-components
+          pnpm test:run
 
 

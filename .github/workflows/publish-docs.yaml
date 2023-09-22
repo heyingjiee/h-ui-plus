@@ -19,7 +19,8 @@ jobs:
         run: pnpm build
       - name: "Publish Docs" #本质就是发布到仓库的gh-pages分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
         run: |
-          npm run docs:build
+          cd packages/h-ui-plus-components 
+          npm run  docs:build
           cd ./docs/.vitepress/dist 
           git init --initial-branch=gh-pages
           git config --global user.email "1270433876@qq.com"
