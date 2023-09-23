@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: |
-          actions/checkout@v3
-          git branch
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
           version: 8
       - name: Install Dependencies
-        run: pnpm i
+        run: | 
+          pnpm i
+          git branch
       - name: Build
         run: pnpm -C ./packages/h-ui-plus-components build
       - name: "Publish to the npm"
