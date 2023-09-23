@@ -291,6 +291,12 @@ CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好
 
 [Action文档](https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#name)
 
+
+
+[Github Action本地调试](https://zhuanlan.zhihu.com/p/535798453)
+
+
+
 ### 推送分支触发单元测试
 
 **使用Action添加CI流程**

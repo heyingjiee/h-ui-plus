@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: |
+          actions/checkout@v3
+          git branch
       - uses: pnpm/action-setup@v2
         with:
           version: 8
