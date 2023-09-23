@@ -19,12 +19,13 @@ jobs:
           git branch
       - name: Build
         run: pnpm -C ./packages/h-ui-plus-components build
+        # -C 指定执行的目录
       - name: "Publish to the npm"
         env:
           NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
         run: |
-          pnpm config set registry=https://registry.npmjs.org
           pnpm config set //registry.npmjs.org/:_authToken "$NPN_AUTH_TOKEN"
-          pnpm  --filter h-ui-plus-components publish --no-git-checks
+          cd ./packages/h-ui-plus-components
+          pnpm  publish --no-git-checks
 
-        # -C 指定执行的目录 ， actions/checkout@v3插件检出的是Head分支，publish发布会提示报错，需要忽略git检查 --no-git-checks
+        # publish发布会提示报错，需要忽略git检查 --no-git-checks

@@ -322,7 +322,7 @@ jobs:
     steps: 
       # uses 使用第三方的action ，参考：（https://github.com/marketplace?type=actions&query=actions）
       # with 给action传入参数。至于yaml对应的格式应该是---> steps:[{uses:'pnpm/action-setup@v2.1.0',with:{version:'7.2.1'}}]
-      - uses: actions/checkout@v3 # 检出仓库，触发的分支是哪个，就检出哪个分支代码
+      - uses: actions/checkout@v3 # 检出仓库，检出的是Head分支
       - uses: pnpm/action-setup@v2 # 使用pnpm安装依赖，传入参数version指定pnpm版本
         with: 
           version: 8 
