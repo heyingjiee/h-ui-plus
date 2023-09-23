@@ -21,7 +21,12 @@
       "pnpm lint"
     ]
   },
-  "keywords": ["vue3","components"],
+  "keywords": [
+    "vue3",
+    "component library",
+    "ui framework",
+    "ui"
+  ],
   "author": "hedaodao",
   "license": "MIT",
   "main": "dist/h-ui.umd.cjs",
