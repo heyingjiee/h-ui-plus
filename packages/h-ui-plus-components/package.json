@@ -1,8 +1,9 @@
 {
   "name": "h-ui-plus-components",
-  "version": "0.0.1-alpha3",
+  "version": "0.0.1-alpha4",
   "description": "vue3组件库模版",
   "type": "module",
+  "homepage": "https://github.com/heyingjiee/h-ui-plus",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",

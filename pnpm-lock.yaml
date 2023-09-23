@@ -105,7 +105,7 @@ importers:
   packages/h-ui-plus-docs:
     dependencies:
       h-ui-plus-components:
-        specifier: workspace:0.0.1-alpha3
+        specifier: workspace:0.0.1-alpha4
         version: link:../h-ui-plus-components
       vitepress:
         specifier: 1.0.0-rc.15
