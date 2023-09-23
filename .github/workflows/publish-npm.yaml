@@ -25,14 +25,6 @@ jobs:
         run: |
           pnpm config set registry=https://registry.npmjs.org
           pnpm config set //registry.npmjs.org/:_authToken "$NPN_AUTH_TOKEN"
-          pnpm -C ./packages/h-ui-plus-components publish
-        
-#        该action已停止维护
-#        uses: primer/publish@v3 # 用于发布到npm
-#        env:
-#          # ${{ secrets.xxx }} 是在项目Setting中设置的Actions secrets中设置的秘钥
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # 去npm仓库获取npm的token，并在在Github项目设置中 创建 NPM_AUTH_TOKEN 把获取到的值加进去就行了
-#        with:
-#          default_branch: "publish" # 默认的发布分支
-#          dir: "." #package.json做在目录。默认'.'
+          pnpm -C ./packages/h-ui-plus-components publish --no-git-checks
+
+        # -C 指定执行的目录 ， actions/checkout@v3插件检出的是Head分支，publish发布会提示报错，需要忽略git检查 --no-git-checks
