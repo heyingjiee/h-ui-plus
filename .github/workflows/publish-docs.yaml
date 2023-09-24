@@ -17,9 +17,10 @@ jobs:
         run: pnpm i
       - name: Build
         run:  pnpm --filter h-ui-plus-components docs:build
-#        run: pnpm -C ./packages/h-ui-plus-docs docs:build
+#        run: pnpm -C ./packages/h-ui-plus-docs docs:build #不能用这个，真的是深渊巨坑。暂时推测是因为用这种方式，会导致package.json中依赖的为workspace的不会被替换为真正的依赖，导致打包失败
       - name: "Publish Docs" #本质就是发布到仓库的gh-pages分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
         run: |
+          ls -al
           cd ./packages/h-ui-plus-docs/docs/.vitepress/dist 
           git init --initial-branch=gh-pages
           git config --global user.email "1270433876@qq.com"
