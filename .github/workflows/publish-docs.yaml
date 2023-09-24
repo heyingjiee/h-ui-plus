@@ -16,7 +16,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
       - name: Build
-        run: pnpm -C ./packages/h-ui-plus-docs docs:build
+        run: pnpm docs:build --filter h-ui-plus-components
+#        run: pnpm -C ./packages/h-ui-plus-docs docs:build
       - name: "Publish Docs" #本质就是发布到仓库的gh-pages分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
         run: |
           cd ./packages/h-ui-plus-docs/docs/.vitepress/dist 
