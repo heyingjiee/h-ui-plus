@@ -30,7 +30,6 @@
   "author": "hedaodao",
   "license": "MIT",
   "main": "dist/h-ui.umd.cjs",
-  "module": "dist/h-ui.umd.cjs",
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.10",
     "@iconify-json/ic": "1.1.4",
