@@ -29,7 +29,8 @@
   ],
   "author": "hedaodao",
   "license": "MIT",
-  "main": "dist/h-ui.umd.cjs",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.10",
     "@iconify-json/ic": "1.1.4",
