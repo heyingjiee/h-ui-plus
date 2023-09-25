@@ -29,7 +29,7 @@
   ],
   "author": "hedaodao",
   "license": "MIT",
-  "main": "dist/h-ui.js",
+  "main": "dist/h-ui.umd.cjs",
   "module": "dist/h-ui.js",
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.10",
