@@ -9,7 +9,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "h-ui-plus-components": "workspace:*",
+    "h-ui-plus-components": "0.0.1-alpha5",
     "vitepress": "1.0.0-rc.15"
   }
 }
