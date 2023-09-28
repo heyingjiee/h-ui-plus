@@ -569,7 +569,7 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 * 次版本号：向下兼容的功能性新增
 * 修订号：向下兼容的问题修正 
 * 版本状态
-  * 预览版：alpha、alpha-2
+  * 预览版：alpha、alpha2
   * 公开测试版：beta
   * 上线候选版（Release Condidate）：即已经具备正式上线条件的版本，RC
   * 正式发布的版本（General Availability ），GA
@@ -577,7 +577,7 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 例如：
 
 ```
-0.0.1-alpha
+0.0.1-alpha2
 ```
 
 
