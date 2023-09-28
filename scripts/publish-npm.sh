@@ -16,7 +16,7 @@ if [ -z "$NPN_AUTH_TOKEN" ]; then
     echo '请进行登录相关操作：'
     npm login # 登陆
 else
-  #已定义 Github Action传入了
+  #已定义 Github Action传入了。shell中使用环境变量： "$xxxx"
    npm config set //registry.npmjs.org/:_authToken "$NPN_AUTH_TOKEN"
 fi
 

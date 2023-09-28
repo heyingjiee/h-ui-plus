@@ -1,0 +1,47 @@
+name: Publish
+
+on:
+  pull_request:
+    branches: [publish]
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    env:
+      NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
+      DOCS_GITHUB_TOKEN: ${{secrets.DOCS_GITHUB_TOKEN}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Build Components
+        run: pnpm -C ./packages/h-ui-plus-components build
+        #run: pnpm build --filter h-ui-plus-components
+      - name: "Publish Components"
+        # -f 指定子包 ， actions/checkout@v3插件检出的是Head分支，publish发布会提示报错，需要忽略git检查 --no-git-checks
+        run: |
+          pnpm config set //registry.npmjs.org/:_authToken "${{secrets.NPN_AUTH_TOKEN}}"
+          mv ./README.md ./packages/h-ui-plus-components
+          pnpm --filter h-ui-plus-components publish --no-git-checks
+          
+      - name: Build Docs
+        run: |
+          node --version
+          pnpm --filter h-ui-plus-docs docs:build
+      # run: pnpm -C ./packages/h-ui-plus-docs docs:build #不能用这个，真的是深渊巨坑。暂时推测是因为用这种方式，会导致package.json中依赖的为workspace的不会被替换为真正的依赖，导致打包失败
+      - name: "Publish Docs" #本质就是发布到仓库的gh-pages分支。secrets.DOCS_GITHUB_TOKEN是本仓库的token
+        run: |
+          cd ./packages/h-ui-plus-docs/docs/.vitepress/dist
+          git init --initial-branch=gh-pages
+          git config --global user.email "1270433876@qq.com"
+          git config --global user.name "Action Auto Publish"
+          git add .
+          git commit -m "docs:文档部署"
+          git remote add origin https://${{secrets.DOCS_GITHUB_TOKEN}}@github.com/heyingjiee/h-ui-plus.git  
+          git push -f -u  origin gh-pages
+
+        
+
