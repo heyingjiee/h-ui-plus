@@ -1,4 +1,4 @@
-name: 发布
+name: Publish
 
 on:
   pull_request:

@@ -4,4 +4,4 @@
 
 <JSButton>JS按钮</JSButton>
 
-补充新版本
+版本：0.1.0-alpha1

@@ -1,7 +1,7 @@
 # 一个yaml/yml文件就是一个工作流
 
 # 指定工作流名
-name: 测试
+name: Test
 # 触发工作流执行的场景（指定哪个分支，遇到push、pull_request时触发）
 on: 
   push: 
