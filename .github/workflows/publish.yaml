@@ -1,11 +1,11 @@
-name: Publish
+name: 发布npm&docs
 
 on:
   pull_request:
     branches: [publish]
 
 jobs:
-  publish-npm:
+  Publish:
     runs-on: ubuntu-latest
     env:
       NPN_AUTH_TOKEN: ${{secrets.NPN_AUTH_TOKEN}}
