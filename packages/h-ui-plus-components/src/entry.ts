@@ -14,4 +14,4 @@ export default {
   },
 };
 
-export { JSButton, SFCButton, TSXButton };
+// export { JSButton, SFCButton, TSXButton };
