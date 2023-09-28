@@ -1,4 +1,4 @@
-name: 发布npm&docs
+name: 发布
 
 on:
   pull_request:

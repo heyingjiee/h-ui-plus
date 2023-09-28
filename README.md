@@ -1,7 +1,5 @@
 # 组件库项目
-[![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)  [![Publish Docs](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml)  [![Publish To Npm](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml)
-
-
+[![单元测试](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
 
 ## 目录规范
 
