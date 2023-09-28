@@ -1,5 +1,5 @@
 # 组件库项目
-[![单元测试](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
+[![Publish](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish.yaml)  [![Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
 
 ## 目录规范
 
@@ -594,7 +594,7 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 
   徽章名是在yaml文件中定义的Action工作流名，徽章状态会自动跟随Action结果变化
 
-  [![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
+  [![Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
 
 * 自己生成的徽章
 
