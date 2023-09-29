@@ -38,7 +38,7 @@ export default defineConfig({
     sourcemap: true, // 输出单独 source文件
     cssCodeSplit: true,
     lib: {
-      entry: "./src/entry.ts", //入口文件。因为库不能使用 HTML 作为入口
+      entry: "./src/Button/index.ts", //入口文件。因为库不能使用 HTML 作为入口
       name: "HUI", //暴露的全局变量
       fileName: "h-ui", //打包输出的文件名前缀（h-ui.js、h-ui.umd.cjs）。（默认是 package.json 的 name 选项）
       formats: ["es", "umd", "iife"], // 导出模块格式（iife是立即执行函数的意思）

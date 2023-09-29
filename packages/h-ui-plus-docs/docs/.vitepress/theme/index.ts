@@ -1,6 +1,6 @@
 import Theme from 'vitepress/theme'
 import HUI from 'h-ui-plus-components'
-import 'h-ui-plus-components/dist/entry.css'
+import 'h-ui-plus-components/dist/index.css'
 import './style/var.css'
 
 export default {

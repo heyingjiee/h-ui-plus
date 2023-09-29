@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build:watch": "vite build --watch",
     "preview": "vite preview",
     "docs:dev": "vitepress dev ../h-ui-plus-docs/docs",
     "docs:build": "vitepress build packages/h-ui-plus-docs/docs",
@@ -59,6 +60,8 @@
     "vitest": "^0.34.1",
     "vue": "3.3.4",
     "vitepress": "1.0.0-rc.15"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
   }
-
 }

@@ -283,6 +283,31 @@ package.json增加脚本
   },
 ```
 
+**3、vite.config.ts配置Vitest**
+
+```ts
+/// <reference types="vitest" />
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  //vite原生没有test字段，使用三斜线指令引入reference types="vitest"
+  test: {
+    // enable jest-like global test APIs
+    globals: true,
+    // simulate DOM with happy-dom
+    // (requires installing happy-dom as a peer dependency)
+    environment: "happy-dom",
+    // 支持测试tsx组件
+    testTransformMode: {
+      web: ["/.[jt]sx$/"],
+    },
+  },
+});
+
+```
+
+
+
 ## CI/CD流程
 
 CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好的一些常用的脚本，当然这些脚本也支持自己定义。可以在下面网址查找：[Action 应用市场](https://github.com/marketplace?type=actions&query=actions)
