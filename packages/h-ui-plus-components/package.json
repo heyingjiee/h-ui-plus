@@ -1,0 +1,74 @@
+{
+  "name": "h-ui-plus-components",
+  "version": "0.0.1-alpha9",
+  "description": "vue3组件库模版",
+  "type": "module",
+  "homepage": "https://github.com/heyingjiee/h-ui-plus",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "build:components": "esno ./scripts/build.ts",
+    "build:watch": "vite build --watch",
+    "preview": "vite preview",
+    "docs:dev": "vitepress dev ../h-ui-plus-docs/docs",
+    "docs:build": "vitepress build packages/h-ui-plus-docs/docs",
+    "docs:preview": "vitepress preview packages/h-ui-plus-docs/docs",
+    "lint": "eslint --fix --ext .js,.ts,.tsx,.vue src/",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue}": [
+      "pnpm lint"
+    ]
+  },
+  "keywords": [
+    "vue3",
+    "component library",
+    "ui framework",
+    "ui"
+  ],
+  "author": "hedaodao",
+  "license": "MIT",
+  "main": "dist/h-ui.umd.cjs",
+  "module": "dist/h-ui.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.10",
+    "@iconify-json/ic": "1.1.4",
+    "@types/fs-extra": "^11.0.2",
+    "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
+    "@vitejs/plugin-vue": "4.2.3",
+    "@vitejs/plugin-vue-jsx": "3.0.1",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/test-utils": "^2.4.1",
+    "conventional-changelog-cli": "^3.0.0",
+    "eslint": "^8.47.0",
+    "eslint-formatter-pretty": "^5.0.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "esno": "^0.17.0",
+    "fs-extra": "^11.1.1",
+    "happy-dom": "^10.9.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.1",
+    "terser": "5.19.2",
+    "typescript": "^5.1.6",
+    "unocss": "0.56.0",
+    "vite": "^4.4.11",
+    "vitepress": "1.0.0-rc.15",
+    "vitest": "^0.34.6",
+    "vue": "3.3.4"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}

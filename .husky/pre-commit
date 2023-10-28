@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+echo ====代码静态检查====
+cd packages/h-ui-plus-components || exit # 前面执行失败，才会执行exit（退出脚本）
+pnpm lint
+
+

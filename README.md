@@ -1,7 +1,5 @@
 # 组件库项目
-[![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)  [![Publish Docs](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-docs.yaml)  [![Publish To Npm](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish-npm.yaml)
-
-
+[![Publish](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/publish.yaml)  [![Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
 
 ## 目录规范
 
@@ -26,6 +24,8 @@
 └── types                # TS类型定义
 
 ```
+
+
 
 ## 集成规范化工具
 
@@ -76,17 +76,60 @@ pnpm i @vue/eslint-config-prettier -D ##  Vue官方提供的prettier配置规则
 pnpm i @babel/eslint-parser -D
 
 ```
+项目下新增 .eslintrc.cjs 配置文件（因为项目整体配置为ESM，所以这里用cjs后缀）
+
+```js
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    node: true,
+    jest: true,
+  },
+  globals: {
+    ga: true,
+    chrome: true,
+    __DEV__: true,
+  },
+
+  extends: [
+    "eslint:recommended",
+    "plugin:json/recommended",
+    "plugin:vue/vue3-essential", // @vue/eslint-plugin插件提供的
+    "@vue/prettier",
+  ],
+  plugins: ["@typescript-eslint", "html"],
+  parserOptions: {
+    parser: "@typescript-eslint/parser", // 解析 .ts 文件
+  },
+  rules: {
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "prettier/prettier": "error",
+  },
+};
+
+```
+
+
+
 package.json增加格式化脚本
 注意：
+
 * 安装了vscode eslint插件后。需要再vsocode的setting.json中配置eslint插件可以检查js、ts、vue、json等格式的文件
   ```json
-    "eslint.validate": [
+  "eslint.validate": [
         "javascript",
         "javascriptreact",
         "html",
         "vue",
         "json"
-    ],
+  ],
+  
+  "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+  }
   ```
   
 * package.json这里的修复仅仅设置了三种格式
@@ -127,6 +170,12 @@ npx husky install
 
 ```shell
 npx husky add .husky/pre-commit "npx lint-staged"
+```
+
+还需要安装lint-staged
+
+```shell
+pnpm i -D lint-staged
 ```
 
 触发`lint-staged`命令，会执行package.json中的`"lint-staged"`自定指定的脚本，如果执行完指定脚本后文件发生了变化，则会自动添加到暂存区
@@ -285,11 +334,40 @@ package.json增加脚本
   },
 ```
 
+**3、vite.config.ts配置Vitest**
+
+```ts
+/// <reference types="vitest" />
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  //vite原生没有test字段，使用三斜线指令引入reference types="vitest"
+  test: {
+    // enable jest-like global test APIs
+    globals: true,
+    // simulate DOM with happy-dom
+    // (requires installing happy-dom as a peer dependency)
+    environment: "happy-dom",
+    // 支持测试tsx组件
+    testTransformMode: {
+      web: ["/.[jt]sx$/"],
+    },
+  },
+});
+
+```
+
+
+
 ## CI/CD流程
 
 CI/CD流程，我们使用Github Action ，其可以认为是Github 提前写好的一些常用的脚本，当然这些脚本也支持自己定义。可以在下面网址查找：[Action 应用市场](https://github.com/marketplace?type=actions&query=actions)
 
 [Action文档](https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#name)
+
+
+
+[Github Action本地调试](https://zhuanlan.zhihu.com/p/535798453)
 
 ### 推送分支触发单元测试
 
@@ -318,7 +396,7 @@ jobs:
     steps: 
       # uses 使用第三方的action ，参考：（https://github.com/marketplace?type=actions&query=actions）
       # with 给action传入参数。至于yaml对应的格式应该是---> steps:[{uses:'pnpm/action-setup@v2.1.0',with:{version:'7.2.1'}}]
-      - uses: actions/checkout@v3 # 检出仓库，触发的分支是哪个，就检出哪个分支代码
+      - uses: actions/checkout@v3 # 检出仓库，检出的是Head分支
       - uses: pnpm/action-setup@v2 # 使用pnpm安装依赖，传入参数version指定pnpm版本
         with: 
           version: 8 
@@ -546,7 +624,18 @@ pnpm i -D unocss@"0.45.6"
 pnpm i -D @iconify-json/ic@"1.1.4"
 ```
 
+分包导出
+
+```
+pnpm add fs-extra @types/fs-extra -D
+```
+
+
+
+
+
 ## 集成文档
+
 配置Vitepress，参考 https://github.com/vuejs/vitepress/tree/main/docs
 ```shell
 ## 安装vitepress。 新建docs/index.md 。npx vitepress dev docs (package.json中配置脚本也行)
@@ -567,15 +656,15 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 * 次版本号：向下兼容的功能性新增
 * 修订号：向下兼容的问题修正 
 * 版本状态
-  * 预览版：alpha、alpha-2
-  * 公开测试版：beta
+  * 预览版：alpha、alpha.2
+  * 公开测试版：beta、beta.2
   * 上线候选版（Release Condidate）：即已经具备正式上线条件的版本，RC
   * 正式发布的版本（General Availability ），GA
 
 例如：
 
 ```
-0.0.1-alpha
+0.0.1-alpha.2
 ```
 
 
@@ -592,7 +681,7 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 
   徽章名是在yaml文件中定义的Action工作流名，徽章状态会自动跟随Action结果变化
 
-  [![Unit Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
+  [![Test](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml/badge.svg)](https://github.com/heyingjiee/h-ui-plus/actions/workflows/test.yaml)
 
 * 自己生成的徽章
 
