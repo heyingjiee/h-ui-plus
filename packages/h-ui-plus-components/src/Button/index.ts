@@ -10,7 +10,7 @@ export default {
   install(app: App): void {
     app.component(JSButton.name, JSButton);
     app.component(TSXButton.name, TSXButton);
-    app.component(SFCButton.name, SFCButton);
+    app.component(SFCButton.__name, SFCButton);
   },
 };
 

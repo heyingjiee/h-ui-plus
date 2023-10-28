@@ -25,6 +25,8 @@
 
 ```
 
+
+
 ## 集成规范化工具
 
 主要使用了
@@ -74,17 +76,60 @@ pnpm i @vue/eslint-config-prettier -D ##  Vue官方提供的prettier配置规则
 pnpm i @babel/eslint-parser -D
 
 ```
+项目下新增 .eslintrc.cjs 配置文件（因为项目整体配置为ESM，所以这里用cjs后缀）
+
+```js
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    node: true,
+    jest: true,
+  },
+  globals: {
+    ga: true,
+    chrome: true,
+    __DEV__: true,
+  },
+
+  extends: [
+    "eslint:recommended",
+    "plugin:json/recommended",
+    "plugin:vue/vue3-essential", // @vue/eslint-plugin插件提供的
+    "@vue/prettier",
+  ],
+  plugins: ["@typescript-eslint", "html"],
+  parserOptions: {
+    parser: "@typescript-eslint/parser", // 解析 .ts 文件
+  },
+  rules: {
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "prettier/prettier": "error",
+  },
+};
+
+```
+
+
+
 package.json增加格式化脚本
 注意：
+
 * 安装了vscode eslint插件后。需要再vsocode的setting.json中配置eslint插件可以检查js、ts、vue、json等格式的文件
   ```json
-    "eslint.validate": [
+  "eslint.validate": [
         "javascript",
         "javascriptreact",
         "html",
         "vue",
         "json"
-    ],
+  ],
+  
+  "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+  }
   ```
   
 * package.json这里的修复仅仅设置了三种格式
@@ -125,6 +170,12 @@ npx husky install
 
 ```shell
 npx husky add .husky/pre-commit "npx lint-staged"
+```
+
+还需要安装lint-staged
+
+```shell
+pnpm i -D lint-staged
 ```
 
 触发`lint-staged`命令，会执行package.json中的`"lint-staged"`自定指定的脚本，如果执行完指定脚本后文件发生了变化，则会自动添加到暂存区
@@ -573,7 +624,18 @@ pnpm i -D unocss@"0.45.6"
 pnpm i -D @iconify-json/ic@"1.1.4"
 ```
 
+分包导出
+
+```
+pnpm add fs-extra @types/fs-extra -D
+```
+
+
+
+
+
 ## 集成文档
+
 配置Vitepress，参考 https://github.com/vuejs/vitepress/tree/main/docs
 ```shell
 ## 安装vitepress。 新建docs/index.md 。npx vitepress dev docs (package.json中配置脚本也行)
@@ -594,15 +656,15 @@ pnpm i vitepress-theme-demoblock@3.0.3 -D
 * 次版本号：向下兼容的功能性新增
 * 修订号：向下兼容的问题修正 
 * 版本状态
-  * 预览版：alpha、alpha2
-  * 公开测试版：beta
+  * 预览版：alpha、alpha.2
+  * 公开测试版：beta、beta.2
   * 上线候选版（Release Condidate）：即已经具备正式上线条件的版本，RC
   * 正式发布的版本（General Availability ），GA
 
 例如：
 
 ```
-0.0.1-alpha2
+0.0.1-alpha.2
 ```
 
 

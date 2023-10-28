@@ -1,6 +1,7 @@
-import { defineConfig } from "vite";
-import path from "path";
+/// <reference types="vitest" />
 
+import { defineConfig } from "vite";
+import url from "url";
 import vue from "@vitejs/plugin-vue";
 
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -10,19 +11,7 @@ import Unocss from "./config/unocss";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
-    },
-  },
-  //vite原生没有test字段，使用三斜线指令引入reference types="vitest"
-  test: {
-    // enable jest-like global test APIs
-    globals: true,
-    // simulate DOM with happy-dom
-    // (requires installing happy-dom as a peer dependency)
-    environment: "happy-dom",
-    // 支持测试tsx组件
-    testTransformMode: {
-      web: ["/.[jt]sx$/"],
+      "@": url.fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
   build: {
@@ -45,4 +34,16 @@ export default defineConfig({
     },
   },
   plugins: [vue(), vueJsx(), Unocss()],
+  //vite原生没有test字段，使用三斜线指令引入reference types="vitest"
+  test: {
+    // enable jest-like global test APIs
+    globals: true,
+    // simulate DOM with happy-dom
+    // (requires installing happy-dom as a peer dependency)
+    environment: "happy-dom",
+    // 支持测试tsx组件
+    testTransformMode: {
+      web: ["/.[jt]sx$/"],
+    },
+  },
 });
