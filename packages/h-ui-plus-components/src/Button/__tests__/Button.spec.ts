@@ -1,6 +1,7 @@
-import SFCButton from "../index";
+import { SFCButton } from "../index";
 
 import { shallowMount } from "@vue/test-utils";
+
 import { describe, expect, test } from "vitest";
 
 //分组
